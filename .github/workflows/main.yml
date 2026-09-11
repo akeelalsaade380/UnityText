@@ -17,13 +17,14 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # غير هذا الرقم إلى إصدار .NET الذي تستخدمه (مثلاً 6.0.x أو 7.0.x)
+        dotnet-version: '8.0.x'
 
+    # تم إضافة اسم الملف هنا لحل المشكلة
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore UnityText.sln
 
     - name: Build project
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build UnityText.sln --configuration Release --no-restore
 
     - name: Run tests (Optional)
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test UnityText.sln --no-build --verbosity normal
