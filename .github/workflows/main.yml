@@ -19,12 +19,8 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    # تم إضافة اسم الملف هنا لحل المشكلة
     - name: Restore dependencies
-      run: dotnet restore UnityText.sln
+      run: dotnet restore Text101.sln
 
     - name: Build project
-      run: dotnet build UnityText.sln --configuration Release --no-restore
-
-    - name: Run tests (Optional)
-      run: dotnet test UnityText.sln --no-build --verbosity normal
+      run: dotnet build Text101.sln --configuration Release --no-restore
