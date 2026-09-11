@@ -1,32 +1,29 @@
-name: Build C# UnityText
+name: Build C# Project
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "master", "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup .NET SDK
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' # غيّر الإصدار إذا كان مشروعك يطلب إصداراً آخر
+        dotnet-version: '8.0.x' # غير هذا الرقم إلى إصدار .NET الذي تستخدمه (مثلاً 6.0.x أو 7.0.x)
 
-    - name: Restore Dependencies
-      run: dotnet restore UnityText.sln # ضع الاسم الصحيح لملف الـ .sln أو .csproj هنا
+    - name: Restore dependencies
+      run: dotnet restore
 
-    - name: Build Release
-      run: dotnet build UnityText.sln --configuration Release --no-restore
+    - name: Build project
+      run: dotnet build --configuration Release --no-restore
 
-    - name: Upload Output Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: UnityText-Executable
-        path: '**/bin/Release/'
+    - name: Run tests (Optional)
+      run: dotnet test --no-build --verbosity normal
