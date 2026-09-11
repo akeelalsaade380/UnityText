@@ -1,4 +1,4 @@
-name: Build UnityText
+name: Build C# UnityText
 
 on:
   push:
@@ -14,19 +14,19 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '8.0.x' # غيّر الإصدار إذا كان مشروعك يطلب إصداراً آخر
 
     - name: Restore Dependencies
-      run: dotnet restore
+      run: dotnet restore UnityText.sln # ضع الاسم الصحيح لملف الـ .sln أو .csproj هنا
 
-    - name: Build Project
-      run: dotnet build --configuration Release --no-restore
+    - name: Build Release
+      run: dotnet build UnityText.sln --configuration Release --no-restore
 
-    - name: Upload Build Artifact
+    - name: Upload Output Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: UnityText-Build
+        name: UnityText-Executable
         path: '**/bin/Release/'
